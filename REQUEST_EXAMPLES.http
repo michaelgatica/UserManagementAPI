@@ -1,0 +1,68 @@
+@baseUrl = http://localhost:5096
+@token = techhive-demo-token
+
+### Health check
+GET {{baseUrl}}/health
+
+### Unauthorized request example
+GET {{baseUrl}}/api/users
+
+### GET all users
+GET {{baseUrl}}/api/users
+X-API-Key: {{token}}
+
+### GET all active users with search
+GET {{baseUrl}}/api/users?activeOnly=true&search=technology
+X-API-Key: {{token}}
+
+### GET user by ID
+GET {{baseUrl}}/api/users/1
+X-API-Key: {{token}}
+
+### POST create user
+POST {{baseUrl}}/api/users
+Content-Type: application/json
+X-API-Key: {{token}}
+
+{
+  "firstName": "Jordan",
+  "lastName": "Smith",
+  "email": "jordan.smith@techhive.local",
+  "department": "Operations",
+  "role": "Coordinator"
+}
+
+### PUT update user
+PUT {{baseUrl}}/api/users/1
+Content-Type: application/json
+X-API-Key: {{token}}
+
+{
+  "firstName": "Alicia",
+  "lastName": "Garcia",
+  "email": "alicia.garcia@techhive.local",
+  "department": "Human Resources",
+  "role": "HR Director",
+  "isActive": true
+}
+
+### DELETE user
+DELETE {{baseUrl}}/api/users/2
+X-API-Key: {{token}}
+
+### Validation test
+POST {{baseUrl}}/api/users
+Content-Type: application/json
+X-API-Key: {{token}}
+
+{
+  "firstName": "",
+  "lastName": "",
+  "email": "not-an-email",
+  "department": "",
+  "role": ""
+}
+
+### Error-handling middleware test
+GET {{baseUrl}}/api/testing/throw
+X-API-Key: {{token}}
